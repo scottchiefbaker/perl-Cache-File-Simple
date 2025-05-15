@@ -132,7 +132,7 @@ Store data in the cache for C<$key>. C<$obj> can be a scalar, listref, or hashre
 Store data in the cache for C<$key> with an expiration time. C<$expires> is a
 unixtime after which the cache entry will be removed.
 
-=item B<cache($key, undef>
+=item B<cache($key, undef)>
 
 Delete an entry from the cache.
 
