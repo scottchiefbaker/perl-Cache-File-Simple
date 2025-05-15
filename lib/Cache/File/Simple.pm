@@ -141,6 +141,14 @@ Delete an entry from the cache.
 Manually remove expired entries from the cache. Returns the number of items
 expired from the cache;
 
+=item B<$Cache::File::Simple::CACHE_ROOT>
+
+Change where the cache files are stored. Default C</tmp/cacheroot>
+
+=item B<$Cache::File::Simple::DEFAULT_EXPIRES>
+
+Change the default time entries are cached for. Default 3600 seconds
+
 =back
 
 =cut

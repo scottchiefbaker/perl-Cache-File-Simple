@@ -4,25 +4,27 @@ Cache::File::Simple - Dead simple file based caching meachanism
 
 # SYNOPSIS
 
-        use Cache::File::Simple;
+```perl
+use Cache::File::Simple;
 
-        my $ckey = "cust:1234";
+my $ckey = "cust:1234";
 
-        # Get data from the cache
-        my $data = cache($ckey);
+# Get data from the cache
+my $data = cache($ckey);
 
-        # Store a scalar
-        cache($ckey, "Jason Doolis");
-        cache($ckey, "Jason Doolis", time() + 7200);
+# Store a scalar
+cache($ckey, "Jason Doolis");
+cache($ckey, "Jason Doolis", time() + 7200);
 
-        # Store an arrayref
-        cache($ckey, [1, 2, 3]);
+# Store an arrayref
+cache($ckey, [1, 2, 3]);
 
-        # Store a hashref
-        cache($ckey, {'one' => 1, 'two' => 2});
+# Store a hashref
+cache($ckey, {'one' => 1, 'two' => 2});
 
-        # Delete an item from the cache
-        cache($ckey, undef);
+# Delete an item from the cache
+cache($ckey, undef);
+```
 
 # DESCRIPTION
 
@@ -46,7 +48,7 @@ an expiration time to allow for easy clean up.
     Store data in the cache for `$key` with an expiration time. `$expires` is a
     unixtime after which the cache entry will be removed.
 
-- **cache($key, undef**
+- **cache($key, undef)**
 
     Delete an entry from the cache.
 
@@ -54,3 +56,11 @@ an expiration time to allow for easy clean up.
 
     Manually remove expired entries from the cache. Returns the number of items
     expired from the cache;
+
+- **$Cache::File::Simple::CACHE\_ROOT**
+
+    Change where the cache files are stored. Default `/tmp/cacheroot`
+
+- **$Cache::File::Simple::DEFAULT\_EXPIRES**
+
+    Change the default time entries are cached for. Default 3600 seconds
