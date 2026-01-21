@@ -88,7 +88,7 @@ sub cache_clean {
 
 =head1 NAME
 
-Cache::File::Simple - Dead simple file based caching meachanism
+Cache::File::Simple - Dead simple file based caching mechanism
 
 =head1 SYNOPSIS
 
