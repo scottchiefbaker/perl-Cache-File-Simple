@@ -182,18 +182,26 @@ unixtime after which the cache entry will be removed.
 
 Delete an entry from the cache.
 
+=item B<Cache::File::Simple::delete_cache($key)>
+
+Delete an entry from the cache and return status as 0/1.
+
+=item B<Cache::File::Simple::has_cache($key)>
+
+Returns 0/1 if there is an an active cache entry named C<$key>.
+
 =item B<Cache::File::Simple::cache_clean()>
 
 Manually remove expired entries from the cache. Returns the number of items
-expired from the cache;
+expired from the cache.
 
 =item B<$Cache::File::Simple::CACHE_ROOT>
 
-Change where the cache files are stored. Default C</tmp/cacheroot>
+Change where the cache files are stored. Default C</tmp/cacheroot>.
 
 =item B<$Cache::File::Simple::DEFAULT_EXPIRES>
 
-Change the default time entries are cached for. Default 3600 seconds
+Change the default time entries are cached for. Default 3600 seconds.
 
 =back
 

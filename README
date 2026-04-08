@@ -1,39 +1,39 @@
-# NAME
+## Name
 
 Cache::File::Simple - Dead simple file based caching mechanism
 
-# SYNOPSIS
+## Synopsis
 
 ```perl
-use Cache::File::Simple;
+    use Cache::File::Simple;
 
-my $ckey = "cust:1234";
+    my $ckey = "cust:1234";
 
-# Get data from the cache
-my $data = cache($ckey);
+    # Get data from the cache
+    my $data = cache($ckey);
 
-# Store a scalar
-cache($ckey, "Jason Doolis");
-cache($ckey, "Jason Doolis", time() + 7200);
+    # Store a scalar
+    cache($ckey, "Jason Doolis");
+    cache($ckey, "Jason Doolis", time() + 7200);
 
-# Store an arrayref
-cache($ckey, [1, 2, 3]);
+    # Store an arrayref
+    cache($ckey, [1, 2, 3]);
 
-# Store a hashref
-cache($ckey, {'one' => 1, 'two' => 2});
+    # Store a hashref
+    cache($ckey, {'one' => 1, 'two' => 2});
 
-# Delete an item from the cache
-cache($ckey, undef);
+    # Delete an item from the cache
+    cache($ckey, undef);
 ```
 
-# DESCRIPTION
+## Description
 
 `Cache::File::Simple` exports a single `cache()` function automatically.
 
 Store Perl data structures in an on-disk file cache. Cache entries can be given
 an expiration time to allow for easy clean up.
 
-# METHODS
+## Methods
 
 - **cache($key)**
 
@@ -52,15 +52,23 @@ an expiration time to allow for easy clean up.
 
     Delete an entry from the cache.
 
+- **Cache::File::Simple::delete\_cache($key)**
+
+    Delete an entry from the cache and return status as 0/1.
+
+- **Cache::File::Simple::has\_cache($key)**
+
+    Returns 0/1 if there is an an active cache entry named `$key`.
+
 - **Cache::File::Simple::cache\_clean()**
 
     Manually remove expired entries from the cache. Returns the number of items
-    expired from the cache;
+    expired from the cache.
 
 - **$Cache::File::Simple::CACHE\_ROOT**
 
-    Change where the cache files are stored. Default `/tmp/cacheroot`
+    Change where the cache files are stored. Default `/tmp/cacheroot`.
 
 - **$Cache::File::Simple::DEFAULT\_EXPIRES**
 
-    Change the default time entries are cached for. Default 3600 seconds
+    Change the default time entries are cached for. Default 3600 seconds.
