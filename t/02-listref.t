@@ -12,7 +12,7 @@ cache($key, [1,2,3,4,5,9]);
 # Get
 my $ret = cache($key);
 
-is(scalar(@$ret), 6);
-is($ret->[5], 9);
+is(scalar(@$ret), 6, "Listref returns six items");
+is($ret->[5], 9,     "Fifth item is correct");
 
 done_testing();
