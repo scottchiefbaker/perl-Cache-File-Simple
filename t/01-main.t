@@ -23,4 +23,13 @@ is(cache($key), undef); # Entry should be expired now
 cache($key, 'donk', time() - 3600);
 is(cache($key), undef);
 
+# Use this entry for the next couple of tests
+cache('foo', 1234);
+
+is(Cache::File::Simple::has_cache('foo')  , 1);
+is(Cache::File::Simple::has_cache('bogus'), 0);
+
+is(Cache::File::Simple::delete_cache('foo')  , 1);
+is(Cache::File::Simple::delete_cache('bogus'), 0);
+
 done_testing();
