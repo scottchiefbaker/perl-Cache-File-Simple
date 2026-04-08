@@ -32,4 +32,11 @@ is(Cache::File::Simple::has_cache('bogus'), 0);
 is(Cache::File::Simple::delete_cache('foo')  , 1);
 is(Cache::File::Simple::delete_cache('bogus'), 0);
 
+# Create some expired entries so we have something to clean
+cache('foo', 1234, -3600);
+cache('bar', 1234, -3600);
+cache('bar', 1234, -3600);
+
+cmp_ok(Cache::File::Simple::cache_clean(), ">", 0, "cache_clean() works");
+
 done_testing();
