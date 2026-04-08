@@ -142,7 +142,6 @@ Cache::File::Simple - Dead simple file based object caching mechanism
 	my $data = cache($ckey);
 
 	# Store a scalar
-	cache($ckey, "Jason Doolis");
 	cache($ckey, "Jason Doolis", time() + 7200);
 
 	# Store an arrayref
@@ -169,14 +168,11 @@ C<Cache::File::Simple> exports a single C<cache()> function automatically.
 
 Get cache data for C<$key> from the cache
 
-=item B<cache($key, $obj)>
-
-Store data in the cache for C<$key>. C<$obj> can be a scalar, listref, or hashref.
-
 =item B<cache($key, $obj, $expires)>
 
-Store data in the cache for C<$key> with an expiration time. C<$expires> is a
-unixtime after which the cache entry will be removed.
+Store data in the cache for C<$key> with an expiration time. C<$obj> can be a
+scalar, listref, or hashref.  C<$expires> is a unixtime after which the cache
+entry will be removed.
 
 =item B<cache($key, undef)>
 

@@ -13,7 +13,6 @@ my $ckey = "cust:1234";
 my $data = cache($ckey);
 
 # Store a scalar
-cache($ckey, "Jason Doolis");
 cache($ckey, "Jason Doolis", time() + 7200);
 
 # Store an arrayref
@@ -39,14 +38,11 @@ an expiration time to allow for easy clean up.
 
     Get cache data for `$key` from the cache
 
-- **cache($key, $obj)**
-
-    Store data in the cache for `$key`. `$obj` can be a scalar, listref, or hashref.
-
 - **cache($key, $obj, $expires)**
 
-    Store data in the cache for `$key` with an expiration time. `$expires` is a
-    unixtime after which the cache entry will be removed.
+    Store data in the cache for `$key` with an expiration time. `$obj` can be a
+    scalar, listref, or hashref.  `$expires` is a unixtime after which the cache
+    entry will be removed.
 
 - **cache($key, undef)**
 
