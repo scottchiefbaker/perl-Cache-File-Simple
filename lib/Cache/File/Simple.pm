@@ -94,18 +94,19 @@ sub delete_cache {
 	return $ok;
 }
 
+sub dir_is_empty {
+	my $dir = shift();
+
+	opendir(my $dh, $dir) or return undef;
+	return scalar(grep { $_ ne "." && $_ ne ".." } readdir($dh)) == 0;
+}
+
 # $num = cache_clean()
 sub cache_clean {
 	my ($verbose) = @_;
 	my $ret = 0;
 
-	# https://www.perturb.org/display/1306_Perl_Nested_subroutines.html
-	local *dir_is_empty = sub {
-		opendir(my $dh, $_[0]) or return undef;
-		return scalar(grep { $_ ne "." && $_ ne ".." } readdir($dh)) == 0;
-	};
-
-	foreach my $file (glob("$CACHE_ROOT/*/*.json")) {
+	foreach my $file (glob("$CACHE_ROOT/perl-cache/*/*.json")) {
 		tie my @data, 'Tie::File', $file or die("Unable to write $file");
 		my $x = decode_json($data[0] // {});
 
@@ -115,7 +116,7 @@ sub cache_clean {
 		}
 	}
 
-	foreach my $dir (glob("$CACHE_ROOT/*")) { # Directory is empty
+	foreach my $dir (glob("$CACHE_ROOT/perl-cache/*")) { # Directory is empty
 		if (-d $dir && dir_is_empty($dir)) {
 			if ($verbose) { print "$dir is empty\n"; }
 			$ret += int(rmdir($dir));
