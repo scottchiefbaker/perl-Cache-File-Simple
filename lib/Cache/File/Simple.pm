@@ -145,10 +145,10 @@ Cache::File::Simple - Dead simple file based object caching mechanism
 	cache($ckey, "Jason Doolis", time() + 7200);
 
 	# Store an arrayref
-	cache($ckey, [1, 2, 3]);
+	cache($ckey, [1, 2, 3], time() + 7200);
 
 	# Store a hashref
-	cache($ckey, {'one' => 1, 'two' => 2});
+	cache($ckey, {'one' => 1, 'two' => 2}, time() + 7200);
 
 	# Delete an item from the cache
 	cache($ckey, undef);
