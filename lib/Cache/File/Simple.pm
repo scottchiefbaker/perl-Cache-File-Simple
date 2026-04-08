@@ -19,7 +19,7 @@ our $CACHE_ROOT     = "/tmp/cacheroot/";
 our $DEFAULT_EXPIRE = 3600;
 
 # https://pause.perl.org/pause/query?ACTION=pause_operating_model#3_5_factors_considering_in_the_indexing_phase
-our $VERSION = '0.1';
+our $VERSION = '0.2';
 
 ###############################################################################
 ###############################################################################
