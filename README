@@ -5,25 +5,25 @@ Cache::File::Simple - Dead simple file based caching mechanism
 ## Synopsis
 
 ```perl
-    use Cache::File::Simple;
+use Cache::File::Simple;
 
-    my $ckey = "cust:1234";
+my $ckey = "cust:1234";
 
-    # Get data from the cache
-    my $data = cache($ckey);
+# Get data from the cache
+my $data = cache($ckey);
 
-    # Store a scalar
-    cache($ckey, "Jason Doolis");
-    cache($ckey, "Jason Doolis", time() + 7200);
+# Store a scalar
+cache($ckey, "Jason Doolis");
+cache($ckey, "Jason Doolis", time() + 7200);
 
-    # Store an arrayref
-    cache($ckey, [1, 2, 3]);
+# Store an arrayref
+cache($ckey, [1, 2, 3]);
 
-    # Store a hashref
-    cache($ckey, {'one' => 1, 'two' => 2});
+# Store a hashref
+cache($ckey, {'one' => 1, 'two' => 2});
 
-    # Delete an item from the cache
-    cache($ckey, undef);
+# Delete an item from the cache
+cache($ckey, undef);
 ```
 
 ## Description
