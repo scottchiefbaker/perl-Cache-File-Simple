@@ -130,7 +130,7 @@ sub cache_clean {
 
 =head1 NAME
 
-Cache::File::Simple - Dead simple file based caching mechanism
+Cache::File::Simple - Dead simple file based object caching mechanism
 
 =head1 SYNOPSIS
 
@@ -156,10 +156,10 @@ Cache::File::Simple - Dead simple file based caching mechanism
 
 =head1 DESCRIPTION
 
-C<Cache::File::Simple> exports a single C<cache()> function automatically.
-
 Store Perl data structures in an on-disk file cache. Cache entries can be given
 an expiration time to allow for easy clean up.
+
+C<Cache::File::Simple> exports a single C<cache()> function automatically.
 
 =head1 METHODS
 

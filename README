@@ -1,6 +1,6 @@
 ## Name
 
-Cache::File::Simple - Dead simple file based caching mechanism
+Cache::File::Simple - Dead simple file based object caching mechanism
 
 ## Synopsis
 
@@ -28,10 +28,10 @@ cache($ckey, undef);
 
 ## Description
 
-`Cache::File::Simple` exports a single `cache()` function automatically.
-
 Store Perl data structures in an on-disk file cache. Cache entries can be given
 an expiration time to allow for easy clean up.
+
+`Cache::File::Simple` exports a single `cache()` function automatically.
 
 ## Methods
 
