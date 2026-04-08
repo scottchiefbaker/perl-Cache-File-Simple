@@ -53,6 +53,47 @@ sub cache {
 	return $ret;
 }
 
+# Returns 0/1 if an active element exists in the cache
+sub has_cache {
+	my $ckey = shift();
+
+	my $hash = sha256_hex($ckey || "");
+	my $dir  = "$CACHE_ROOT/perl-cache/" . substr($hash, 0, 3);
+	my $file = "$dir/$hash.json";
+
+	if (!-r $file) {
+		return 0;
+	}
+
+	my @data;
+	tie @data, 'Tie::File', $file or die("Unable to write $file"); # to r/w file
+
+	my $ret = 0;
+	my $x   = {};
+	eval { $x = decode_json($data[0]); };
+
+	if ($x->{expires} && $x->{expires} > time()) {
+		$ret = 1;
+	} else {
+		unlink($file);
+	}
+
+	return $ret;
+}
+
+# Returns 0/1 if an element was removed from the cache
+sub delete_cache {
+	my $ckey = shift();
+
+	my $hash = sha256_hex($ckey || "");
+	my $dir  = "$CACHE_ROOT/perl-cache/" . substr($hash, 0, 3);
+	my $file = "$dir/$hash.json";
+
+	my $ok = unlink($file);
+
+	return $ok;
+}
+
 # $num = cache_clean()
 sub cache_clean {
 	my ($verbose) = @_;
