@@ -197,7 +197,7 @@ expired from the cache.
 
 Change where the cache files are stored. Default C</tmp/cacheroot>.
 
-=item B<$Cache::File::Simple::DEFAULT_EXPIRES>
+=item B<$Cache::File::Simple::DEFAULT_EXPIRE>
 
 Change the default time entries are cached for. Default 3600 seconds.
 
