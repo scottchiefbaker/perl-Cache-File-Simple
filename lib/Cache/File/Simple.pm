@@ -13,7 +13,6 @@ use JSON::PP;
 use Tie::File;
 use File::Path;
 use Digest::SHA qw(sha256_hex);
-use File::Basename;
 
 our $CACHE_ROOT     = "/tmp/cacheroot/";
 our $DEFAULT_EXPIRE = 3600;
@@ -24,23 +23,30 @@ our $VERSION = '0.2';
 ###############################################################################
 ###############################################################################
 
+sub _cache_path {
+	my ($key) = @_;
+	my $hash = sha256_hex($key // "");
+	my $dir  = "$CACHE_ROOT/perl-cache/" . substr($hash, 0, 3);
+	return ($dir, "$dir/$hash.json");
+}
+
 # Cache get: cache($key);
 # Cache set: cache($key, $val, $expires = 3600);
 sub cache {
-	my ($key, $val, $expire, $ret, @data) = @_;
+	my ($key, $val, $expire, $ret) = @_;
 
-	my $hash = sha256_hex($key || "");
-	my $dir  = "$CACHE_ROOT/perl-cache/" . substr($hash, 0, 3);
-	my $file = "$dir/$hash.json";
-	mkpath($dir);
-
-	tie @data, 'Tie::File', $file or die("Unable to write $file"); # to r/w file
+	my ($dir, $file) = _cache_path($key);
 
 	if (@_ > 1) { # Set
+		mkpath($dir);
+		my @data;
+		tie @data, 'Tie::File', $file or die("Unable to write $file");
 		my $expires = int($expire || 0) || time() + $DEFAULT_EXPIRE;
 		$data[0]    = encode_json({ expires => $expires, data => $val, key => $key });
 		$ret        = 1;
 	} elsif ($key && -r $file) { # Get
+		my @data;
+		tie @data, 'Tie::File', $file or die("Unable to write $file");
 		my $x = {};
 		eval { $x = decode_json($data[0]); };
 		if ($x->{expires} && $x->{expires} > time()) {
@@ -56,11 +62,9 @@ sub cache {
 
 # Returns 0/1 if an active element exists in the cache
 sub has_cache {
-	my $ckey = shift();
+	my ($key) = @_;
 
-	my $hash = sha256_hex($ckey || "");
-	my $dir  = "$CACHE_ROOT/perl-cache/" . substr($hash, 0, 3);
-	my $file = "$dir/$hash.json";
+	my ($dir, $file) = _cache_path($key);
 
 	if (!-r $file) {
 		return 0;
@@ -84,11 +88,9 @@ sub has_cache {
 
 # Returns 0/1 if an element was removed from the cache
 sub delete_cache {
-	my $ckey = shift();
+	my ($key) = @_;
 
-	my $hash = sha256_hex($ckey || "");
-	my $dir  = "$CACHE_ROOT/perl-cache/" . substr($hash, 0, 3);
-	my $file = "$dir/$hash.json";
+	my ($dir, $file) = _cache_path($key);
 
 	my $ok = unlink($file);
 
