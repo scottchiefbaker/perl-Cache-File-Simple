@@ -1,4 +1,16 @@
 Revision history for Cache-File-Simple
 
+0.3 2026-06-25
+	- Fix crash in cache() on corrupt/empty JSON cache files
+	- Fix crash in cache_clean() when encountering empty or malformed cache files
+	- Fix POD typo: DEFAULT_EXPIRES → DEFAULT_EXPIRE
+	- Extract _cache_path() helper to eliminate duplicated hash-to-path logic
+	- Only mkdir on cache set, not every cache() call
+	- Fix numeric key 0 being silently hashed as empty string
+	- Remove unused File::Basename import
+
+0.2 2025-05-15
+	- Add has_cache(), delete_cache(), cache_clean() functions
+
 0.1 2025-05-15
 	- Initial version
