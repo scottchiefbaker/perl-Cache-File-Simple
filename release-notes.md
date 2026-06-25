@@ -6,14 +6,14 @@
 ### Generate the Makefile again
 `perl Makefile.PL`
 
-### Run the tests 
+### Run the tests
 `make test`
 
 ### Run the tests faster
 `prove -lv t/0*`
 
 ### Regenerate the `README.md` from the POD documentation
-`pod2markdown lib/Cache/File/Simple.pm > README.md`
+`pod2github lib/Cache/File/Simple.pm > README.md`
 
 ### Make the .tar.gz
 `make tardist`
