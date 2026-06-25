@@ -109,9 +109,10 @@ sub cache_clean {
 
 	foreach my $file (glob("$CACHE_ROOT/perl-cache/*/*.json")) {
 		tie my @data, 'Tie::File', $file or die("Unable to write $file");
-		my $x = decode_json($data[0] // {});
+		my $x = {};
+		eval { $x = decode_json($data[0] // '{}'); };
 
-		if ($x->{expires} < time()) { # File is expired
+		if ($x->{expires} && $x->{expires} < time()) { # File is expired
 			if ($verbose) { print "$file is expired\n"; }
 			$ret += int(unlink($file));
 		}
