@@ -41,9 +41,10 @@ sub cache {
 		$data[0]    = encode_json({ expires => $expires, data => $val, key => $key });
 		$ret        = 1;
 	} elsif ($key && -r $file) { # Get
-		eval { $ret = decode_json($data[0]); };
-		if ($ret->{expires} && $ret->{expires} > time()) {
-			$ret = $ret->{data};
+		my $x = {};
+		eval { $x = decode_json($data[0]); };
+		if ($x->{expires} && $x->{expires} > time()) {
+			$ret = $x->{data};
 		} else {
 			unlink($file);
 			$ret = undef;
