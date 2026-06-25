@@ -1,4 +1,4 @@
-use 5.010;
+use 5.016;
 use strict;
 use warnings;
 use ExtUtils::MakeMaker;
@@ -9,7 +9,7 @@ my %WriteMakefileArgs = (
     VERSION_FROM     => 'lib/Cache/File/Simple.pm',
     ABSTRACT_FROM    => 'lib/Cache/File/Simple.pm',
     LICENSE          => 'mit',
-    MIN_PERL_VERSION => '5.010',
+    MIN_PERL_VERSION => '5.016',
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => '0',
     },
