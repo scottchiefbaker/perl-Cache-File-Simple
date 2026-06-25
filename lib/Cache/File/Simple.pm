@@ -138,24 +138,24 @@ Cache::File::Simple - Dead simple file based object caching mechanism
 
 =head1 SYNOPSIS
 
-	use Cache::File::Simple;
+  use Cache::File::Simple;
 
-	my $ckey = "cust:1234";
+  my $ckey = "cust:1234";
 
-	# Get data from the cache
-	my $data = cache($ckey);
+  # Get data from the cache
+  my $data = cache($ckey);
 
-	# Store a scalar
-	cache($ckey, "Jason Doolis", time() + 7200);
+  # Store a scalar
+  cache($ckey, "Jason Doolis", time() + 7200);
 
-	# Store an arrayref
-	cache($ckey, [1, 2, 3], time() + 7200);
+  # Store an arrayref
+  cache($ckey, [1, 2, 3], time() + 7200);
 
-	# Store a hashref
-	cache($ckey, {'one' => 1, 'two' => 2}, time() + 7200);
+  # Store a hashref
+  cache($ckey, {'one' => 1, 'two' => 2}, time() + 7200);
 
-	# Delete an item from the cache
-	cache($ckey, undef);
+  # Delete an item from the cache
+  cache($ckey, undef);
 
 =head1 DESCRIPTION
 
